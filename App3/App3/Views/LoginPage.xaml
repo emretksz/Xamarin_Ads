@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="App3.Views.LoginPage"
+             Shell.NavBarIsVisible="False">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <Image Source="icon_about.png" Aspect="AspectFit"
+           AbsoluteLayout.LayoutBounds="0.5, 0.2, 150, 150"
+           AbsoluteLayout.LayoutFlags="PositionProportional" />
+
+            <StackLayout Padding="20" AbsoluteLayout.LayoutBounds="0.5, 0.6, 0.8, 0.4"
+                 AbsoluteLayout.LayoutFlags="All">
+                <Entry Placeholder="Kullanıcı Adı" x:Name="usernameEntry" />
+                <Entry Placeholder="Şifre" IsPassword="True" x:Name="passwordEntry" />
+                <Button Text="Giriş Yap" Clicked="OnLoginButtonClicked" />
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>
