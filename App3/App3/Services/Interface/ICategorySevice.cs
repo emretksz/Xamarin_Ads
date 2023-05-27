@@ -1,4 +1,4 @@
-﻿using App3.Models;
+﻿using App3.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;

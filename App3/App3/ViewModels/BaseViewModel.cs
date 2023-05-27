@@ -1,5 +1,5 @@
 ﻿
-using App3.Models;
+using App3.Entities;
 using App3.Services;
 using App3.Services.Interface;
 using App3.Services.Management;
@@ -23,6 +23,12 @@ namespace App3.ViewModels
         {
             get { return isBusy; }
             set { SetProperty(ref isBusy, value); }
+        } 
+        bool isClickBusy = true;
+        public bool IsClickBusy
+        {
+            get { return isClickBusy; }
+            set { SetProperty(ref isClickBusy, value); }
         }
 
         string title = string.Empty;

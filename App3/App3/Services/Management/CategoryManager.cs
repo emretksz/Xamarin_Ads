@@ -1,4 +1,4 @@
-﻿using App3.Models;
+﻿using App3.Entities;
 using App3.Services.Interface;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;

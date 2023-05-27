@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace App3.Models
+namespace App3.Entities
 {
-   public class User
+    public class User
     {
         public int Id { get; set; }
         public string FullName { get; set; }

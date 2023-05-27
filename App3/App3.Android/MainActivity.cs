@@ -5,6 +5,7 @@ using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
 using Android.Gms.Ads;
+using Acr.UserDialogs;
 
 namespace App3.Droid
 {
@@ -19,7 +20,7 @@ namespace App3.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             // MobileAds.Initialize(this);
             MobileAds.Initialize(ApplicationContext);
-
+            UserDialogs.Init(this);
             Java.Util.Locale.Default = new Java.Util.Locale("tr", "TR");
             Resources.Configuration.Locale = Java.Util.Locale.Default;
             Resources.UpdateConfiguration(Resources.Configuration, Resources.DisplayMetrics);

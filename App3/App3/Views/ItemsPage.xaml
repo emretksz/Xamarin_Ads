@@ -5,21 +5,24 @@
              x:Class="App3.Views.ItemsPage"
              Title="{Binding Title}"
              xmlns:local="clr-namespace:App3.ViewModels"
-             xmlns:model="clr-namespace:App3.Models"
+             xmlns:model="clr-namespace:App3.Entities"
              x:Name="BrowseItemsPage">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem x:Name="puan" Text="{Binding Point}"  />
     </ContentPage.ToolbarItems>
     <StackLayout>
+
         <StackLayout Orientation="Horizontal" VerticalOptions="Center">
-            <Label Text="Kategoriler" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center" Margin="20,0,0,0" />
-            <ScrollView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Always" Margin="20,0,0,0">
+            <Label Text="Kategoriler" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center" Margin="20,0,0,0"  />
+           
+            <ScrollView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Always" Margin="20,0,0,0" WidthRequest="150" BackgroundColor="red" HorizontalOptions="Center" VerticalOptions="Center" >
                 <Frame Padding="0">
                     <Picker x:Name="DropdownPicker" Title="Kategori Seçin" SelectedIndexChanged="DropdownPicker_SelectedIndexChanged">
                         <Picker.ItemsSource>
                             <x:Array Type="{x:Type model:Category}">
-               
+                            
+
                             </x:Array>
                         </Picker.ItemsSource>
                         <Picker.ItemDisplayBinding>
@@ -30,7 +33,7 @@
             </ScrollView>
         </StackLayout>
 
-        <RefreshView x:DataType="local:ItemsViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+        <RefreshView x:DataType="local:ItemsViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Margin="5,10,5,0" >
             <CollectionView x:Name="ItemsListView"
                 ItemsSource="{Binding Items}"
                 SelectionMode="None">
@@ -39,31 +42,38 @@
                          Span="2" 
                          VerticalItemSpacing="10"
                          HorizontalItemSpacing="10"
+                         
                                  />
                 </CollectionView.ItemsLayout>
+             
                 <CollectionView.ItemTemplate>
 
+         
                     <DataTemplate>
-                        <Frame Margin="5" BackgroundColor="WhiteSmoke" HasShadow="True" CornerRadius="10">
+                        <Frame Margin="5" BackgroundColor="Gray" HasShadow="True" CornerRadius="10">
                             <Grid RowSpacing="1"  x:DataType="model:Product">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto" />
                                     <RowDefinition Height="15" />
                                     <RowDefinition Height="25" />
-                                    <RowDefinition Height="70" />
+                                    <RowDefinition Height="50" /> <!--Burası butonarın aralığı-->
                                 </Grid.RowDefinitions>
 
                                 <Image VerticalOptions="Center" Source="icon_about.png" Aspect="AspectFill" HeightRequest="150" Grid.Row="0" />
                                 <Label Text="{Binding Title}" HorizontalTextAlignment="Center" TextColor="Black"  FontSize="16"  Grid.Row="2" />
                                 <Label Text="{Binding Description}"  HorizontalTextAlignment="Center"   TextColor="Black" FontSize="14" Grid.Row="3" />
                                 <Button BindingContext="{Binding Id}" Text="Detaylar" Clicked="DetayaGit" BackgroundColor="WhiteSmoke" TextColor="Black" Margin="1" HeightRequest="30"   CornerRadius="5" Grid.Row="4" />
-                                <Button BindingContext="{Binding Id}" Text="Reklam İzle" Clicked="ReklamIzle"  BackgroundColor="WhiteSmoke" TextColor="Black" Margin="1" HeightRequest="30"   CornerRadius="5" Grid.Row="5" />
+                                <Button BindingContext="{Binding Id}" Text="Reklam İzle" Clicked="ReklamIzle"  BackgroundColor="WhiteSmoke"  TextColor="Black" Margin="1" HeightRequest="30"   CornerRadius="5" Grid.Row="5" />
+                       
                             </Grid>
                         </Frame>
+           
                     </DataTemplate>
+             
                 </CollectionView.ItemTemplate>
+                
             </CollectionView>
-
+          
         </RefreshView>
         <admob:MTAdView AdsId="ca-app-pub-3940256099942544/6300978111" HeightRequest="90"/>
     </StackLayout>

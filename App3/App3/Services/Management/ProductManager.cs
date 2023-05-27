@@ -1,4 +1,4 @@
-﻿using App3.Models;
+﻿using App3.Entities;
 using App3.Services.Interface;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
@@ -58,6 +58,14 @@ namespace App3.Services.Management
                 return await db.Products.Where(a=>a.CategoryId==id).ToListAsync();
             }
         }
+        public List<Product> GetItemByCategoryId(int id)
+        {
+            ///sayfalama eklenecek
+            using (ET_AdsContext db = new ET_AdsContext())
+            {
+                return db.Products.Where(a=>a.CategoryId==id).ToList();
+            }
+        }
 
         public async Task<List<Category>> GetProductCategory()
         {
@@ -65,7 +73,6 @@ namespace App3.Services.Management
             {
                 using (ET_AdsContext db = new ET_AdsContext())
                 {
-                    var q = await db.Categories.ToListAsync();
                     return await db.Categories.ToListAsync();
                 }
             }

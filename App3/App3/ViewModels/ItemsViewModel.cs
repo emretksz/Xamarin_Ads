@@ -1,9 +1,9 @@
 ﻿
-using App3.Models;
+using App3.Entities;
 using App3.Services.Management;
 using App3.Views;
-using Entities.Models;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -15,32 +15,38 @@ namespace App3.ViewModels
     public class ItemsViewModel : BaseViewModel
     {
         private Product _selectedItem;
+        public int categoryId = 0;
       
         public ObservableCollection<Product> Items { get; }
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
         public Command<Product> ItemTapped { get; }
 
-        public ItemsViewModel()
+        public ItemsViewModel(int categoryId = 0)
         {
             Title = "Browse";
             Items = new ObservableCollection<Product>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand(categoryId));
 
             ItemTapped = new Command<Product>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
         }
 
-        async Task ExecuteLoadItemsCommand()
+        async Task ExecuteLoadItemsCommand(int categoryId=0)
         {
             IsBusy = true;
             ProductManager productManager = new ProductManager();
             try
             {
                 Items.Clear();
-                var items = await productManager.GetItemsAsync();
-                foreach (var item in items)
+                IEnumerable <Product> productList = new List<Product>();
+                if (categoryId>0)
+                    productList = await productManager.GetItemByCategoryIdAsync(categoryId);
+                else
+                    productList = await productManager.GetItemsAsync();
+                 
+                foreach (var item in productList)
                 {
                     Items.Add(item);
                 }

@@ -1,5 +1,5 @@
 ﻿
-using App3.Models;
+using App3.Entities;
 using App3.ViewModels;
 using Entities.Models;
 using System;

@@ -1,4 +1,4 @@
-﻿using App3.Models;
+﻿using App3.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,6 +10,7 @@ namespace App3.Services.Interface
     {
          IEnumerable<Product> GetAll();
         Task<IEnumerable<Product>> GetItemByCategoryIdAsync(int id);
+        List<Product> GetItemByCategoryId(int id);
         Task<List<Category>> GetProductCategory();
     }
 }

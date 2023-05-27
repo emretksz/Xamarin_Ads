@@ -1,7 +1,8 @@
-﻿using System;
+﻿using App3.Entities;
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace App3.Models
+namespace App3.Entities
 {
     public class Product
     {
@@ -14,6 +15,8 @@ namespace App3.Models
         public DateTime RegsterDate { get; set; }
         public bool IsActive { get; set; }
         public int CategoryId { get; set; }
+        [NotMapped]
+        public bool IsBusy { get; set; }
         public Category Category { get; set; }
 
     }

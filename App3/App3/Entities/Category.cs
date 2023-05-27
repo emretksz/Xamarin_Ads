@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace App3.Models
+namespace App3.Entities
 {
     public class Category
     {
