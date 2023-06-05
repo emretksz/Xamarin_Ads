@@ -6,6 +6,7 @@
              Title="{Binding Title}"
              xmlns:local="clr-namespace:App3.ViewModels"
              xmlns:model="clr-namespace:App3.Entities"
+             xmlns:model2="clr-namespace:App3.Entities.Dto"
              x:Name="BrowseItemsPage">
 
     <ContentPage.ToolbarItems>
@@ -33,7 +34,7 @@
             </ScrollView>
         </StackLayout>
 
-        <RefreshView x:DataType="local:ItemsViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}" Margin="5,10,5,0" >
+        <RefreshView x:DataType="model2:ItemsViewDto" Command="{Binding LoadItemsCommand}"  Margin="5,10,5,0" >
             <CollectionView x:Name="ItemsListView"
                 ItemsSource="{Binding Items}"
                 SelectionMode="None">

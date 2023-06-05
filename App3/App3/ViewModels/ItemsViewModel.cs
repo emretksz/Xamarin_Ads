@@ -1,5 +1,6 @@
 ﻿
 using App3.Entities;
+using App3.Entities.Dto;
 using App3.Services.Management;
 using App3.Views;
 using System;
@@ -14,41 +15,49 @@ namespace App3.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {
-        private Product _selectedItem;
         public int categoryId = 0;
-      
-        public ObservableCollection<Product> Items { get; }
-        public Command LoadItemsCommand { get; }
-        public Command AddItemCommand { get; }
-        public Command<Product> ItemTapped { get; }
+        public List<Product> TempProduct { get; set; }
+        //public ObservableCollection<Category> CategoryList { get; }
+        //public Command LoadItemsCommand { get; }
+
 
         public ItemsViewModel(int categoryId = 0)
         {
             Title = "Browse";
-            Items = new ObservableCollection<Product>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand(categoryId));
-
-            ItemTapped = new Command<Product>(OnItemSelected);
-
-            AddItemCommand = new Command(OnAddItem);
+            //Items = new ObservableCollection<Product>();
+            //LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand(categoryId));
         }
 
-        async Task ExecuteLoadItemsCommand(int categoryId=0)
+       public async Task<ItemsViewDto> ExecuteLoadItemsCommand(int categoryId=0)
         {
+            ItemsViewDto viewList = new ItemsViewDto();
+            viewList.Items = new List<Product>();
+            viewList.CategoryList = new List<Category>();
             IsBusy = true;
             ProductManager productManager = new ProductManager();
+            TempProduct = new List<Product>();
             try
             {
-                Items.Clear();
+                //Items.Clear();
                 IEnumerable <Product> productList = new List<Product>();
+           
                 if (categoryId>0)
                     productList = await productManager.GetItemByCategoryIdAsync(categoryId);
                 else
-                    productList = await productManager.GetItemsAsync();
+                {
+
+                    var result = await productManager.ProductAndCategory();
+                    productList = result.Product;
+                    foreach (var item in result.Category)
+                    {
+                        viewList.CategoryList.Add(item);
+                    }
+                  
+                }
                  
                 foreach (var item in productList)
                 {
-                    Items.Add(item);
+                    viewList.Items.Add(item);
                 }
             }
             catch (Exception ex)
@@ -59,36 +68,21 @@ namespace App3.ViewModels
             {
                 IsBusy = false;
             }
-        }
 
+            TempProduct.AddRange(viewList.Items);
+            viewList.LoadItemsCommand = new Command(async () => await GetProduct());
+            return viewList;
+        }
+        public async Task<List<Product>> GetProduct()
+        {
+            return TempProduct;
+        }
         public void OnAppearing()
         {
             IsBusy = true;
-            SelectedItem = null;
+         
         }
 
-        public Product SelectedItem
-        {
-            get => _selectedItem;
-            set
-            {
-                SetProperty(ref _selectedItem, value);
-                OnItemSelected(value);
-            }
-        }
-
-        private async void OnAddItem(object obj)
-        {
-            await Shell.Current.GoToAsync(nameof(NewItemPage));
-        }
-
-        async void OnItemSelected(Product item)
-        {
-            if (item == null)
-                return;
-
-            // This will push the ItemDetailPage onto the navigation stack
-            await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.id)}={item.Id}");
-        }
+    
     }
 }

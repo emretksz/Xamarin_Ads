@@ -9,7 +9,7 @@ namespace App3.Services.Interface
     public interface ICategorySevice:IDataStore<Category>
     {
         Task<IEnumerable<Category>> GetProductCategoryAsync();
-        Task<IEnumerable<Category>> GetItems();
+        Task<List<Category>> GetItems();
 
     }
 }

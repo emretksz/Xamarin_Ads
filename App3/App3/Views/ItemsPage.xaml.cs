@@ -42,44 +42,73 @@ namespace App3.Views
             //    CrossMTAdmob.Current.ShowRewarded();
             //};
 
-            ProductManager productManager = new ProductManager();
-            CategoryManager category = new CategoryManager();
-            puan.Text = "Reklam Sayısı: " + "10";
-            BindingContext = _viewModel = new ItemsViewModel();
-            var temps = category.GetItems() as List<Category>;
-            Category selectOption = new Category()
-            {
-                Id = 0,
-                Name = "Tüm Kategoriler"
+            //ProductManager productManager = new ProductManager();
+            //CategoryManager category = new CategoryManager();
+            //puan.Text = "Reklam Sayısı: " + "10";
+            //BindingContext = _viewModel = new ItemsViewModel();
+            //var temps = Task.Run(async () => await category.GetItems()).Result;
+            //temps = temps as List<Category>;
+            //Category selectOption = new Category()
+            //{
+            //    Id = 0,
+            //    Name = "Tüm Kategoriler"
 
-            };
-             temps.Insert(0, selectOption);
-            DropdownPicker.ItemsSource = temps;
+            //};
+            // temps.Insert(0, selectOption);
+            //DropdownPicker.ItemsSource = temps;
 
             CrossMTAdmob.Current.OnRewardedLoaded += (s, args) =>
             {
                 CrossMTAdmob.Current.ShowRewarded();
             };
-
+            IsBusy = true;
+            //UserDialogs.Instance.ShowLoading();
         }
 
-        
-        protected override void OnAppearing()
+   
+        protected async override void OnAppearing()
         {
-            base.OnAppearing();
-            _viewModel.OnAppearing();
+            try
+            {
+                base.OnAppearing();
+            
+                IsBusy = true;
+                await System.Threading.Tasks.Task.Delay(800);
+                // _viewModel.OnAppearing();
+                var viewModel = _viewModel = new ItemsViewModel();
+                Category selectOption = new Category()
+                {
+                    Id = 0,
+                    Name = "Tüm Kategoriler"
+
+                };
+                var result = await viewModel.ExecuteLoadItemsCommand();
+
+                result.CategoryList.Insert(0, selectOption);
+                DropdownPicker.ItemsSource = result.CategoryList;
+                //UserDialogs.Instance.HideLoading();
+                BindingContext = result;
+               
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
-           public void DropdownPicker_SelectedIndexChanged(object sender, EventArgs e)
+        public async void DropdownPicker_SelectedIndexChanged(object sender, EventArgs e)
         {
  
             var selectedOption = DropdownPicker.SelectedItem  as Category;
             List<Product> getFilterProduct = new List<Product>();
-           
-            if (selectedOption.Id>0)
-                getFilterProduct.AddRange(_viewModel.Items.Where(a => a.CategoryId == Convert.ToInt32(selectedOption.Id)));
+            var result =await _viewModel.ExecuteLoadItemsCommand();
+
+
+            if (selectedOption!=null&& selectedOption.Id>0)
+                getFilterProduct.AddRange(result.Items.Where(a => a.CategoryId == Convert.ToInt32(selectedOption.Id)));
             else
                 //kategori boşsa
-                getFilterProduct.AddRange(_viewModel.Items);
+                getFilterProduct.AddRange(result.Items);
           
             ObservableCollection<Product> Items = new ObservableCollection<Product>();
             foreach (var item in getFilterProduct)

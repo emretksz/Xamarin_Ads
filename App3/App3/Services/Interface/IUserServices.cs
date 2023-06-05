@@ -10,5 +10,7 @@ namespace App3.Services.Interface
     public interface IUserServices
     {
         User GetUsers();
+         Task<string>CheckUserForCreate(User user);
+        Task<string> AddUser(User user);
     }
 }

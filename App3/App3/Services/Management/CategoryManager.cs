@@ -29,11 +29,11 @@ namespace App3.Services.Management
 
      
 
-        public IEnumerable<Category> GetItems()
+        public async  Task<List<Category>> GetItems()
         {
             using (ET_AdsContext db= new ET_AdsContext())
             {
-                return  db.Categories.ToList();
+                return  await db.Categories.AsNoTracking().ToListAsync();
             }
         }
 
@@ -52,9 +52,6 @@ namespace App3.Services.Management
             throw new NotImplementedException();
         }
 
-        Task<IEnumerable<Category>> ICategorySevice.GetItems()
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

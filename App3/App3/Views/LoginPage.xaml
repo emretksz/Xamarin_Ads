@@ -16,7 +16,7 @@
                  AbsoluteLayout.LayoutFlags="All">
                 <Entry Placeholder="Kullanıcı Adı" x:Name="usernameEntry" />
                 <Entry Placeholder="Şifre" IsPassword="True" x:Name="passwordEntry" />
-                <Button Text="Giriş Yap" Clicked="OnLoginButtonClicked" />
+                <Button Text="Giriş Yap" Clicked="OnCreateUser" />
             </StackLayout>
         </AbsoluteLayout>
     </ContentPage.Content>
