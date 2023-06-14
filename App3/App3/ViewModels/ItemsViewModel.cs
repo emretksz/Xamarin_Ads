@@ -16,6 +16,7 @@ namespace App3.ViewModels
     public class ItemsViewModel : BaseViewModel
     {
         public int categoryId = 0;
+        public ICommand LoadItemsCommand { get; set; }
         public List<Product> TempProduct { get; set; }
         //public ObservableCollection<Category> CategoryList { get; }
         //public Command LoadItemsCommand { get; }
@@ -70,11 +71,19 @@ namespace App3.ViewModels
             }
 
             TempProduct.AddRange(viewList.Items);
-            viewList.LoadItemsCommand = new Command(async () => await GetProduct());
+      
+            
+            viewList.LoadItemsCommand = new Command(() =>
+            {
+                var productList = GetProduct();
+               
+            });
+
             return viewList;
         }
-        public async Task<List<Product>> GetProduct()
+        public List<Product> GetProduct()
         {
+            
             return TempProduct;
         }
         public void OnAppearing()

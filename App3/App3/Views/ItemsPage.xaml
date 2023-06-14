@@ -33,8 +33,9 @@
                 </Frame>
             </ScrollView>
         </StackLayout>
-
-        <RefreshView x:DataType="model2:ItemsViewDto" Command="{Binding LoadItemsCommand}"  Margin="5,10,5,0" >
+        <!--Command="{Binding LoadItemsCommand}"-->
+        <RefreshView    x:DataType="model2:ItemsViewDto"   Margin="5,10,5,0" >
+          
             <CollectionView x:Name="ItemsListView"
                 ItemsSource="{Binding Items}"
                 SelectionMode="None">
@@ -49,28 +50,30 @@
              
                 <CollectionView.ItemTemplate>
 
-         
                     <DataTemplate>
                         <Frame Margin="5" BackgroundColor="Gray" HasShadow="True" CornerRadius="10">
-                            <Grid RowSpacing="1"  x:DataType="model:Product">
+                            <Grid RowSpacing="1" x:DataType="model:Product">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="auto" />
                                     <RowDefinition Height="15" />
                                     <RowDefinition Height="25" />
-                                    <RowDefinition Height="50" /> <!--Burası butonarın aralığı-->
+                                    <RowDefinition Height="50" />
+                                    <!--Burası butonların aralığı-->
                                 </Grid.RowDefinitions>
 
-                                <Image VerticalOptions="Center" Source="icon_about.png" Aspect="AspectFill" HeightRequest="150" Grid.Row="0" />
-                                <Label Text="{Binding Title}" HorizontalTextAlignment="Center" TextColor="Black"  FontSize="16"  Grid.Row="2" />
-                                <Label Text="{Binding Description}"  HorizontalTextAlignment="Center"   TextColor="Black" FontSize="14" Grid.Row="3" />
-                                <Button BindingContext="{Binding Id}" Text="Detaylar" Clicked="DetayaGit" BackgroundColor="WhiteSmoke" TextColor="Black" Margin="1" HeightRequest="30"   CornerRadius="5" Grid.Row="4" />
-                                <Button BindingContext="{Binding Id}" Text="Reklam İzle" Clicked="ReklamIzle"  BackgroundColor="WhiteSmoke"  TextColor="Black" Margin="1" HeightRequest="30"   CornerRadius="5" Grid.Row="5" />
-                       
+                                <Image VerticalOptions="Center" Source="{Binding ImageURL}" Aspect="AspectFill" HeightRequest="150" Grid.Row="0" />
+                                <Label Text="{Binding Title}" HorizontalTextAlignment="Center" TextColor="Black" FontSize="16" Grid.Row="2" />
+                                <Label Text="{Binding Description}" HorizontalTextAlignment="Center" TextColor="Black" FontSize="14" Grid.Row="3" />
+                                <Button BindingContext="{Binding Id}" Text="Detaylar" Clicked="DetayaGit" BackgroundColor="WhiteSmoke" TextColor="Black" Margin="1" HeightRequest="30" CornerRadius="5" Grid.Row="4" />
+                                <Button BindingContext="{Binding Id}" Text="Reklam İzle" Clicked="ReklamIzle" BackgroundColor="WhiteSmoke" TextColor="Black" Margin="1" HeightRequest="30" CornerRadius="5" Grid.Row="5" />
+                                <!-- Sağ üstteki yuvarlak buton -->
+                                <AbsoluteLayout HorizontalOptions="End" VerticalOptions="Start" Margin="20,-11,-10,0">
+                                    <Button Text="Yuvarlak Buton" BackgroundColor="Blue" TextColor="White" WidthRequest="50" HeightRequest="50" CornerRadius="25" Clicked="ReklamIzle" />
+                                </AbsoluteLayout>
                             </Grid>
                         </Frame>
-           
                     </DataTemplate>
-             
+
                 </CollectionView.ItemTemplate>
                 
             </CollectionView>

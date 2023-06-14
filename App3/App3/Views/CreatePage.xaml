@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App3.Views.CreatePage">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand"
+                     HorizontalOptions="FillAndExpand"
+                     BackgroundColor="#eaeaea"
+                     Padding="50">
+            <Label Text="Kullanıcı Bilgileri"
+                   FontSize="20"
+                   HorizontalOptions="Center"
+                   Margin="0,0,0,20"/>
+            <Entry Placeholder="Kullanıcı Adı" 
+                   x:Name="usernameEntry"
+                   Margin="0,0,0,10"/>
+            <Entry Placeholder="Şifre" 
+                   IsPassword="True"
+                   x:Name="passwordEntry"
+                   Margin="0,0,0,10"/>
+            <Entry Placeholder="E-posta" 
+                   Keyboard="Email"
+                   x:Name="emailEntry"
+                   Margin="0,0,0,10"/>
+            <Entry Placeholder="Referans Kodu" 
+                   x:Name="refcodeEntry"
+                   Margin="0,0,0,10"/>
+            <Button Text="Kaydet"
+                    Clicked="SaveButton_Clicked"
+                    BackgroundColor="#4CAF50"
+                    TextColor="White"
+                    Margin="0,20,0,0"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

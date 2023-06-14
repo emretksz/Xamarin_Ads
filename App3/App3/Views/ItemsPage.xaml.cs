@@ -20,6 +20,7 @@ using App3.Services.Management;
 using App3.Entities;
 using System.Collections.ObjectModel;
 using Acr.UserDialogs;
+using Xamarin.Forms.PlatformConfiguration;
 
 namespace App3.Views
 {
@@ -44,7 +45,7 @@ namespace App3.Views
 
             //ProductManager productManager = new ProductManager();
             //CategoryManager category = new CategoryManager();
-            //puan.Text = "Reklam Sayısı: " + "10";
+         
             //BindingContext = _viewModel = new ItemsViewModel();
             //var temps = Task.Run(async () => await category.GetItems()).Result;
             //temps = temps as List<Category>;
@@ -63,9 +64,12 @@ namespace App3.Views
             };
             IsBusy = true;
             //UserDialogs.Instance.ShowLoading();
+           puan.Text = "Reklam Sayısı: " + "10";
+        
         }
-
-   
+     
+      
+        private bool firstOne = false;
         protected async override void OnAppearing()
         {
             try
@@ -82,12 +86,17 @@ namespace App3.Views
                     Name = "Tüm Kategoriler"
 
                 };
-                var result = await viewModel.ExecuteLoadItemsCommand();
+                if (!firstOne)
+                {
+                    var result = await viewModel.ExecuteLoadItemsCommand();
 
-                result.CategoryList.Insert(0, selectOption);
-                DropdownPicker.ItemsSource = result.CategoryList;
-                //UserDialogs.Instance.HideLoading();
-                BindingContext = result;
+                    result.CategoryList.Insert(0, selectOption);
+                    DropdownPicker.ItemsSource = result.CategoryList;
+                    //UserDialogs.Instance.HideLoading();
+                    BindingContext = result;
+                    firstOne = true;
+                }
+              
                
             }
             catch (Exception ex)
@@ -96,6 +105,7 @@ namespace App3.Views
                 throw;
             }
         }
+    
         public async void DropdownPicker_SelectedIndexChanged(object sender, EventArgs e)
         {
  

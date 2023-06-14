@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App3.Views.VerificationPage">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Center"
+                     HorizontalOptions="CenterAndExpand"
+                     Padding="10">
+            <Label Text="Doğrulama Kodu"
+                   FontSize="20"
+                   HorizontalOptions="Center"
+                   Margin="0,0,0,20"/>
+            <Entry Placeholder="Doğrulama Kodu" 
+                   x:Name="verificationCodeEntry"
+                   Margin="0,0,0,10"/>
+            <Label x:Name="countdownLabel"
+                   FontSize="18"
+                   HorizontalOptions="Center"
+                   Margin="0,0,0,20"/>
+            <Button Text="Doğrula"
+                    Clicked="VerifyButton_Clicked"
+                    BackgroundColor="#4CAF50"
+                    TextColor="White"
+                    Margin="0,0,0,0"/>
+            <Button Text="İptal Et"
+                    Clicked="CloseVerify"
+                    BackgroundColor="Red"
+                    TextColor="White"
+                    Margin="0,10,0,0"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

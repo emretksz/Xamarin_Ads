@@ -47,6 +47,11 @@ namespace App3.Views
                 await DisplayAlert("Hata", "Yanlış kullanıcı adı veya şifre.", "Tamam");
             }
        
+        }        
+        public async void CreatePageOpen(object sender,EventArgs e)
+        {
+            await Navigation.PushAsync(new CreatePage());
+            //await Shell.Current.GoToAsync(state: "//CreatePage");
         }
         /// <summary>
         /// 

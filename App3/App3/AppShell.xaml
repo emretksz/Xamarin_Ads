@@ -33,11 +33,12 @@
         </ResourceDictionary>
     </Shell.Resources>
         <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
-
+        <ShellContent Title="Kayıt Ol" Icon="icon_feed.png" ContentTemplate="{DataTemplate local:CreatePage}"    />
     <TabBar Route="main">
         <ShellContent Title="Ana Sayfa" Icon="icon_about.png" ContentTemplate="{DataTemplate local:AboutPage}" />
         <ShellContent Title="Ürünler" Icon="icon_feed.png"  ContentTemplate="{DataTemplate local:ItemsPage}"  />
         <ShellContent Title="Profilim" Icon="icon_feed.png" ContentTemplate="{DataTemplate local:ProfilePage}"    />
+
         <ShellContent Title="Davet Kodu" Icon="icon_feed.png"  />
     </TabBar>
 
